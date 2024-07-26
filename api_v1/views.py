@@ -1,3 +1,5 @@
+from typing import Dict, List
+
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -11,14 +13,14 @@ class GetForecastWeatherAPIView(APIView):
     def post(self, request, *args, **kwargs):
         serializer = CityDataSerializer(data=request.data)
         if serializer.is_valid():
-            city = serializer.validated_data['city']
-            latitude = serializer.validated_data['latitude']
-            longitude = serializer.validated_data['longitude']
+            city: str = serializer.validated_data['city']
+            latitude: float = serializer.validated_data['latitude']
+            longitude: float = serializer.validated_data['longitude']
 
-            new_data = {'city': city, 'latitude': latitude, 'longitude': longitude}
+            new_data: Dict[str, str | float] = {'city': city, 'latitude': latitude, 'longitude': longitude}
 
             # Получаем историю из сессии
-            search_history = request.session.get('search_history', [])
+            search_history: List[dict] = request.session.get('search_history', [])
 
             # Удаляем город из истории, если он уже существует
             search_history = [item for item in search_history if item != new_data]
@@ -32,11 +34,11 @@ class GetForecastWeatherAPIView(APIView):
             # Сохраняем историю в сессии
             request.session['search_history'] = search_history
 
-            location = {
+            location: Dict[str, float] = {
                 "lat": latitude,
                 "lon": longitude
             }
-            params = {
+            params: Dict[str, str] = {
                 "units": "metric",
                 "exclude": "minutely,alerts,hourly",
             }
