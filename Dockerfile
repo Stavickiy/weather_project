@@ -1,6 +1,9 @@
 # Используем базовый образ Python
 FROM python:3.10-slim
 
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
 # Устанавливаем зависимости для работы с PostgreSQL и netcat
 RUN apt-get update && apt-get install -y \
     postgresql-client \
