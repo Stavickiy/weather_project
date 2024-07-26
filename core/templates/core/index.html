@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %}
+{% block content %}
+{% if error %}
+<h2>{{error}}</h2>
+{% else %}
+<div class="forecast-table">
+    <div class="container">
+        <div class="forecast-container">
+            <div class="today forecast">
+                <div class="forecast-header">
+                    <div class="day">{{ weather_data.current.dt|unix_to_datetime:"%A" }}</div>
+                    <div class="date">{{ weather_data.current.dt|unix_to_datetime:"%d" }} {{ weather_data.current.dt|unix_to_datetime:"%b" }}</div>
+                </div> <!-- .forecast-header -->
+                <div class="forecast-content">
+                    <div class="location">{{default_city}}
+                    <div class="forecast-icon">
+                            <img src="http://openweathermap.org/img/wn/{{ weather_data.current.weather.0.icon }}@4x.png" alt="" width=90>
+                        </div>
+                    </div>
+                    <span>{{ weather_data.current.weather.0.description }}</span>
+
+                    <div class="degree">
+                        <div class="num">{{ weather_data.current.temp|floatformat:0 }}<sup>o</sup>C</div>
+                    </div>
+                    <span><img src="{% static 'images/icon-umberella.png' %}" alt="">{{ weather_data.daily.0.pop|multiply:'100' }}%</span>
+                    <span><img src="{% static 'images/icon-wind.png' %}" alt="">{{ weather_data.current.wind_speed|floatformat:0 }}m/s</span>
+                    <span><img src="{% static 'images/icon-compass.png' %}" alt="">{{ weather_data.current.wind_deg }}</span>
+                </div>
+            </div>
+            <div class="forecast">
+                <div class="forecast-header">
+                    <div class="day">{{ weather_data.daily.1.dt|unix_to_datetime:"%A" }}<br>{{ weather_data.daily.1.dt|unix_to_datetime:"%d" }} {{ weather_data.daily.1.dt|unix_to_datetime:"%b" }}</div>
+                </div> <!-- .forecast-header -->
+                <div class="forecast-content">
+                    <div class="forecast-icon">
+                        <img src="http://openweathermap.org/img/wn/{{ weather_data.daily.1.weather.0.icon }}@4x.png" alt="" width=70>
+                    </div>
+                    <div class="degree">{{ weather_data.daily.1.temp.max|floatformat:0 }}<sup>o</sup>C</div>
+                    <small>{{ weather_data.daily.1.temp.min|floatformat:0 }}<sup>o</sup></small><br><br>
+                    <span><img src="{% static 'images/icon-umberella.png' %}" alt="">{{ weather_data.daily.1.pop|multiply:'100' }}%</span>
+                </div>
+                <div style="text:center">
+
+                </div>
+            </div>
+            <div class="forecast">
+                <div class="forecast-header">
+                    <div class="day">{{ weather_data.daily.2.dt|unix_to_datetime:"%A" }}<br>{{ weather_data.daily.2.dt|unix_to_datetime:"%d" }} {{ weather_data.daily.2.dt|unix_to_datetime:"%b" }}</div>
+                </div> <!-- .forecast-header -->
+                <div class="forecast-content">
+                    <div class="forecast-icon">
+                        <img src="http://openweathermap.org/img/wn/{{ weather_data.daily.2.weather.0.icon }}@4x.png" alt="" width=70>
+                    </div>
+                    <div class="degree">{{ weather_data.daily.2.temp.max|floatformat:0 }}<sup>o</sup>C</div>
+                    <small>{{ weather_data.daily.2.temp.min|floatformat:0 }}<sup>o</sup></small><br><br>
+                    <span><img src="{% static 'images/icon-umberella.png' %}" alt="">{{ weather_data.daily.2.pop|multiply:'100' }}%</span>
+                </div>
+                <div style="text:center">
+
+                </div>
+            </div>
+            <div class="forecast">
+                <div class="forecast-header">
+                    <div class="day">{{ weather_data.daily.3.dt|unix_to_datetime:"%A" }}<br>{{ weather_data.daily.3.dt|unix_to_datetime:"%d" }} {{ weather_data.daily.3.dt|unix_to_datetime:"%b" }}</div>
+                </div> <!-- .forecast-header -->
+                <div class="forecast-content">
+                    <div class="forecast-icon">
+                        <img src="http://openweathermap.org/img/wn/{{ weather_data.daily.3.weather.0.icon }}@4x.png" alt="" width=70>
+                    </div>
+                    <div class="degree">{{ weather_data.daily.3.temp.max|floatformat:0 }}<sup>o</sup>C</div>
+                    <small>{{ weather_data.daily.3.temp.min|floatformat:0 }}<sup>o</sup></small><br><br>
+                    <span><img src="{% static 'images/icon-umberella.png' %}" alt="">{{ weather_data.daily.3.pop|multiply:'100' }}%</span>
+                </div>
+                <div style="text:center">
+
+                </div>
+            </div>
+            <div class="forecast">
+                <div class="forecast-header">
+                    <div class="day">{{ weather_data.daily.4.dt|unix_to_datetime:"%A" }}<br>{{ weather_data.daily.4.dt|unix_to_datetime:"%d" }} {{ weather_data.daily.4.dt|unix_to_datetime:"%b" }}</div>
+                </div> <!-- .forecast-header -->
+                <div class="forecast-content">
+                    <div class="forecast-icon">
+                        <img src="http://openweathermap.org/img/wn/{{ weather_data.daily.4.weather.0.icon }}@4x.png" alt="" width=70>
+                    </div>
+                    <div class="degree">{{ weather_data.daily.4.temp.max|floatformat:0 }}<sup>o</sup>C</div>
+                    <small>{{ weather_data.daily.4.temp.min|floatformat:0 }}<sup>o</sup></small><br><br>
+                    <span><img src="{% static 'images/icon-umberella.png' %}" alt="">{{ weather_data.daily.4.pop|multiply:'100' }}%</span>
+                </div>
+                <div style="text:center">
+
+                </div>
+            </div>
+            <div class="forecast">
+                <div class="forecast-header">
+                    <div class="day">{{ weather_data.daily.5.dt|unix_to_datetime:"%A" }}<br>{{ weather_data.daily.5.dt|unix_to_datetime:"%d" }} {{ weather_data.daily.5.dt|unix_to_datetime:"%b" }}</div>
+                </div> <!-- .forecast-header -->
+                <div class="forecast-content">
+                    <div class="forecast-icon">
+                        <img src="http://openweathermap.org/img/wn/{{ weather_data.daily.5.weather.0.icon }}@4x.png" alt="" width=70>
+                    </div>
+                    <div class="degree">{{ weather_data.daily.5.temp.max|floatformat:0 }}<sup>o</sup>C</div>
+                    <small>{{ weather_data.daily.5.temp.min|floatformat:0 }}<sup>o</sup></small><br><br>
+                    <span><img src="{% static 'images/icon-umberella.png' %}" alt="">{{ weather_data.daily.5.pop|multiply:'100' }}%</span>
+                </div>
+                <div style="text:center">
+
+                </div>
+            </div>
+            <div class="forecast">
+                <div class="forecast-header">
+                    <div class="day">{{ weather_data.daily.6.dt|unix_to_datetime:"%A" }}<br>{{ weather_data.daily.6.dt|unix_to_datetime:"%d" }} {{ weather_data.daily.6.dt|unix_to_datetime:"%b" }}</div>
+                </div> <!-- .forecast-header -->
+                <div class="forecast-content">
+                    <div class="forecast-icon">
+                        <img src="http://openweathermap.org/img/wn/{{ weather_data.daily.6.weather.0.icon }}@4x.png" alt="" width=70>
+                    </div>
+                    <div class="degree">{{ weather_data.daily.6.temp.max|floatformat:0 }}<sup>o</sup>C</div>
+                    <small>{{ weather_data.daily.2.temp.min|floatformat:0 }}<sup>o</sup></small><br><br>
+                    <span><img src="{% static 'images/icon-umberella.png' %}" alt="">{{ weather_data.daily.6.pop|multiply:'100' }}%</span>
+                </div>
+                <div style="text:center">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

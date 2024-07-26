@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1">
+    <meta name="csrf-token" content="{% csrf_token %}">
+
+    <title>{{ title }}</title>
+
+    <link href="http://fonts.googleapis.com/css?family=Roboto:300,400,700|" rel="stylesheet" type="text/css">
+    <link href="{% static 'fonts/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_PLACE_KEY_API }}&libraries=places"></script>
+
+    <!--[if lt IE 9]>
+    <script src="{% static 'js/ie-support/html5.js' %}"></script>
+    <script src="{% static 'js/ie-support/respond.js' %}"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div class="site-content">
+        <div class="site-header">
+            <div class="container">
+                <a href="/" class="branding">
+                    <img src="{% static 'images/logo.png' %}" alt="" class="logo">
+                    <div class="logo-type">
+                        <h1 class="site-title">Weather forecast</h1>
+                        <small class="site-description">choose your city</small>
+                    </div>
+                </a>
+
+                <div class="mobile-navigation"></div>
+            </div>
+        </div>
+
+        <div class="hero" data-bg-image="{% static 'images/fon_picture.jpg' %}">
+            <div class="container">
+                <form action="javascript:void(0);" class="find-location" id="location-form">
+                    <input type="text" id="city-search" placeholder="Find your location...">
+                    <input type="submit" id="find-button" value="Find" disabled>
+                </form>
+                <div id="search-history-list" style="margin-bottom:70px;margin-left:10px">
+                    {% for city in search_history %}
+                    <a class="search-history-item" href="#">
+                        <u class="history_city">{{city.city}}</u>
+                    </a>
+                    <span hidden>{{ city.latitude }}</span>
+                    <span hidden>{{ city.longitude }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        {% block content %}
+        {% endblock %}
+
+        <footer class="site-footer">
+            <div class="container text-center">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <h6 class="text-uppercase mb-3">Developers</h6>
+                            <a class="footer-link" href="https://t.me/Eugenius71991">Eugenius</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="{% static 'js/custom.js' %}"></script>
+
+    <script src="{% static 'js/jquery-1.11.1.min.js' %}"></script>
+    <script src="{% static 'js/plugins.js' %}"></script>
+    <script src="{% static 'js/app.js' %}"></script>
+</body>
+</html>
